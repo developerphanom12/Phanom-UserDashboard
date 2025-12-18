@@ -8,6 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
+        Schema::dropIfExists('quiz_options');
         Schema::create('quiz_options', function (Blueprint $table) {
             $table->id();
             $table->foreignId('quiz_question_id')->constrained()->onDelete('cascade');
