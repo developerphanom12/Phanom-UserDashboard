@@ -4,6 +4,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\TopbarLink;
 use App\Models\ServiceSection;
+use App\Models\CategorySubcategory;
+use App\Models\SignupFormConfig;
+use App\Models\Quiz;
 use App\Http\Controllers\Api\Admin\TopbarApiController;
 use App\Http\Controllers\Api\Public\ContactController;
 use App\Http\Controllers\Api\PublicQueryController;
@@ -102,14 +105,14 @@ Route::post('/mocktrail/webhook', [MockTrailController::class,'webhook']);
 
 // Public API for signup form config (categories/subcategories)
 Route::get('/signup-config/categories', function () {
-    return App\Models\CategorySubcategory::where('is_active', true)
+    return CategorySubcategory::where('is_active', true)
         ->orderBy('category_name')
         ->get(['id', 'category_name', 'subcategories']);
 });
 
 // Public API to get form field configuration
 Route::get('/signup-config/fields', function () {
-    return App\Models\SignupFormConfig::where('is_active', true)
+    return SignupFormConfig::where('is_active', true)
         ->orderBy('step_number')
         ->orderBy('sort_order')
         ->get(['step_number', 'field_name', 'field_label', 'field_type', 'is_required', 'placeholder', 'options']);
@@ -117,7 +120,7 @@ Route::get('/signup-config/fields', function () {
 
 // Public API to check if quiz is available and get questions
 Route::get('/quiz/available', function () {
-    $quiz = App\Models\Quiz::where('is_published', true)
+    $quiz = Quiz::where('is_published', true)
         ->with(['questions.options'])
         ->first();
     
