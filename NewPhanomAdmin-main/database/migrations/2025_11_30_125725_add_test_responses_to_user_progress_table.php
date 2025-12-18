@@ -12,7 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('user_progress', function (Blueprint $table) {
-            $table->json('test_responses')->nullable()->after('test_completed_at');
+            // Only add column if it doesn't exist
+            if (!Schema::hasColumn('user_progress', 'test_responses')) {
+                $table->json('test_responses')->nullable()->after('test_completed_at');
+            }
         });
     }
 
@@ -22,7 +25,10 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('user_progress', function (Blueprint $table) {
-            $table->dropColumn('test_responses');
+            // Only drop column if it exists
+            if (Schema::hasColumn('user_progress', 'test_responses')) {
+                $table->dropColumn('test_responses');
+            }
         });
     }
 };
