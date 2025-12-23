@@ -122,7 +122,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between sm:px-12 px-4">
           {/* Left side */}
           <div className="flex items-center">
-            <a href="https://www.phanomprofessionals.com/">
+            <a href="/">
  <img
               src={Images.Logo}
               alt="logo"
