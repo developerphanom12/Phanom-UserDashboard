@@ -12,7 +12,26 @@ use App\Http\Controllers\Admin\NewsletterController;
 use App\Http\Controllers\Admin\UserDetailsController;
 use App\Http\Controllers\Admin\QuizController;
 use App\Http\Controllers\Admin\SignupConfigController;
+use Illuminate\Support\Facades\Storage;
 
+/*
+|--------------------------------------------------------------------------
+| Storage File Serving (Fallback if symlink doesn't work)
+|--------------------------------------------------------------------------
+*/
+Route::get('/storage/{path}', function ($path) {
+    $filePath = storage_path('app/public/' . $path);
+    
+    if (!file_exists($filePath)) {
+        abort(404);
+    }
+    
+    $mimeType = mime_content_type($filePath);
+    
+    return response()->file($filePath, [
+        'Content-Type' => $mimeType,
+    ]);
+})->where('path', '.*');
 /*
 |--------------------------------------------------------------------------
 | Admin Auth

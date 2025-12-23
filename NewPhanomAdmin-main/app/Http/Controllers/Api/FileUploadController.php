@@ -30,7 +30,8 @@ class FileUploadController extends Controller
         $path = $file->storeAs('uploads/user-documents', $filename, 'public');
         
         // Generate URL
-        $url = asset('storage/' . $path);
+        $url = $request->getSchemeAndHttpHost() . '/storage/' . $path;
+
         
         return response()->json([
             'ok' => true,
