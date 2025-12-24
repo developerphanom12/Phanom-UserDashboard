@@ -5,7 +5,7 @@ import FooterBg from "./media/FooterCircleBg.png";
 import MobileFooterBg from "./media/footer_mobile_bg.png";
 import hero1 from "./media/heroLogo1.png";
 import hero2 from "./media/heroLogo2.png";
-import PhanomLogo from "./media/PhanomLogo.png"
+import PhanomLogo from "./media/phanomlogo.png"
 import PaymentApproved from "./media/PaymentApproved.png";
 import FirstRoundTest from "./media/FirstRoundTest.png";
 import YourScorePass from "./media/YourScorePass.png"
@@ -52,3 +52,4 @@ const Images = {
 };
 
 export default Images;
+
